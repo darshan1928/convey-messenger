@@ -5,6 +5,10 @@ const app = express()
 const dotenv = require("dotenv")
 const PORT = process.env.PORT || 8887
 dotenv.config()
+
+app.use(express.json())
+
+
 app.get("/",(req,res)=>{
 res.json({
     message:"its working"
