@@ -8,7 +8,7 @@ try {
         useNewUrlParser:true,
         useUnifiedTopology:true,
     })
-    console.log(`mongo db established @ ${connection.host}`);
+    console.log(`mongo db established @ ${connection.host}`.cyan.underline);
     
     } catch (error) {
         console.log("mongo db establishment failed==",error.message);

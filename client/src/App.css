@@ -1,5 +1,16 @@
-*{
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap");
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+
+.App{
+    min-height: 100vh;
+    display :flex;
+   background: grey;
+   color:green;
+   background-position: center;
 }
