@@ -14,3 +14,32 @@
    color:green;
    background-position: center;
 }
+
+
+
+
+/* Firefox */
+/* Hide the scrollbar track (width: 0) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(136, 136, 136, 0.281) #ffffff;
+}
+
+/* WebKit-based browsers (Chrome and Safari) */
+/* Hide the scrollbar */
+::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Style the scrollbar thumb */
+/* WebKit-based browsers (Chrome and Safari) */
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.281);
+  border-radius: 4px; /* Optional: Add rounded corners to the thumb */
+}
+
+/* Handle on hover */
+/* WebKit-based browsers (Chrome and Safari) */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

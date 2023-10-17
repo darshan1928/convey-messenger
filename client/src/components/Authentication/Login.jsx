@@ -38,7 +38,7 @@ export default function Login() {
         } catch (error) {
             console.log("error==", error.message);
             toast({
-                title: "Error Occured!!!",
+                title: "Error Occurred!!!",
                 description: error.response.data.message,
                 status: "warning",
                 duration: 5000,
