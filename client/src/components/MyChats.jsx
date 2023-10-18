@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { ChatState } from "../context/ChatProvider";
 import { Stack, Text, useToast } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/layout";
-import { Button } from "@chakra-ui/button";
+
 import axios from "axios";
 import { AddIcon } from "@chakra-ui/icons";
 import ChatLoading from "../components/ChatLoading";
 import { getSender } from "../config/ChatLogics";
+import GroupChatModal from "./miscellaneous/GroupChatModal";
 
 export default function MyChats() {
     const [loggedUser, setLoggedUser] = useState();
@@ -22,9 +23,10 @@ export default function MyChats() {
                     "Access-Control-Allow-Origin": "http://localhost:8888/",
                 },
             };
-
+            // api/chat/   get
+            // to get all the users we have messaged
             const { data } = await axios.get("http://localhost:8888/api/chat", config);
-            console.log(data);
+
             setChats(data);
         } catch (error) {
             toast({
@@ -39,7 +41,14 @@ export default function MyChats() {
     };
 
     useEffect(() => {
-        setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+        try {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+            setLoggedUser(userInfo);
+        } catch (error) {
+            console.error("Error parsing userInfo:", error);
+        }
+
         fetchChats();
     }, []);
 
@@ -66,9 +75,12 @@ export default function MyChats() {
                 alignItems="center"
             >
                 My Chats
+                <GroupChatModal />
+                {/* 
                 <Button rightIcon={<AddIcon />} display="flex" fontSize={{ base: "17px", md: "10px", lg: "17px" }}>
                     New Group Chat
-                </Button>
+                </Button> */}
+                {/* </GroupChatModal> */}
             </Box>
             <Box display="flex" flexDir="column" p={3} w="100%" h="100%" bg="#F8F8F8" borderRadius="1g" overflowY="hidden">
                 {chats ? (
@@ -86,7 +98,8 @@ export default function MyChats() {
                                 cursor="pointer"
                                 borderRadius="lg"
                             >
-                                <Text>{!chat.isGroupchat ? getSender(loggedUser, chat.users) : chat.chatName}</Text>
+                                <Text>{chat?.isGroupChat==="false" ? getSender(loggedUser, chat.users) : chat?.chatName}</Text>
+                               
                             </Box>
                         ))}
                     </Stack>

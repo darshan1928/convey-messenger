@@ -11,7 +11,7 @@ const accessChat = async (req, res) => {
     }
 
     // chat exist with this user
-
+// one to one chat between login user and selected user
     var isChat = await Chat.find({
         isGroupChat: false,
         $and: [{ users: { $elemMatch: { $eq: req.user._id } } }, { users: { $elemMatch: { $eq: userId } } }],

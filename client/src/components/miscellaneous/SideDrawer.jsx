@@ -42,7 +42,7 @@ export default function SideDrawer() {
         localStorage.removeItem("userInfo");
         navigate("/");
     };
-
+//searching user
     const handleSearch = async () => {
         if (!search) {
             toast({
@@ -63,6 +63,7 @@ export default function SideDrawer() {
                     "Access-Control-Allow-Origin": "http://localhost:8888/",
                 },
             };
+            // api/user/query - get allUsers
             const { data } = await axios.get(`http://localhost:8888/api/user?search=${search}`, config);
             setSearchResult(data);
             setLoading(false);
@@ -76,38 +77,39 @@ export default function SideDrawer() {
                 position: "bottom-left",
             });
         }
-
-     
     };
-       const accessChat = async (userId) => {
-           try {
-               setLoadingChat(true);
-               const config = {
-                   headers: {
-                       "Content-type": "application/json",
-                       Authorization: `Bearer ${user.token}`,
-                       "Access-Control-Allow-Origin": "http://localhost:8888/",
-                   },
-               };
 
-               const { data } = await axios.post("http://localhost:8888/api/chat", { userId }, config);
-//    selected user details =data
-               if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);  // confusing 
+    //accessing to all user except login user
+    const accessChat = async (userId) => {
+        try {
+            setLoadingChat(true);
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                    Authorization: `Bearer ${user.token}`,
+                    "Access-Control-Allow-Origin": "http://localhost:8888/",
+                },
+            };
+            //    selected user details = data
+            //   api/chat post-  accessChat
+            const { data } = await axios.post("http://localhost:8888/api/chat", { userId }, config);
+               console.log(data);
+            if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]); // confusing
 
-               setSelectedChat(data);
-               setLoadingChat(false);
-               onClose();
-           } catch (error) {
-               toast({
-                   title: "Error Occurred",
-                   description: error.message,
-                   status: "warning",
-                   duration: 5000,
-                   isClosable: true,
-                   position: "bottom-left",
-               });
-           }
-       };
+            setSelectedChat(data);
+            setLoadingChat(false);
+            onClose();
+        } catch (error) {
+            toast({
+                title: "Error Occurred",
+                description: error.message,
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-left",
+            });
+        }
+    };
     return (
         <>
             <Box
@@ -169,10 +171,11 @@ export default function SideDrawer() {
                             <ChatLoading />
                         ) : (
                             searchResult?.map((user) => (
+                                //all user except login user
                                 <UserListItem key={user._id} user={user} handleFunction={() => accessChat(user._id)} />
                             ))
                         )}
-                        {loadingChat && <Spinner ml="auto" display="flex"/>}
+                        {loadingChat && <Spinner ml="auto" display="flex" />}
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>

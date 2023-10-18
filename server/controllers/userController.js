@@ -4,6 +4,9 @@ const { generateToken } = require("../config/generateToken");
 const { hashPassword, comparePassword } = require("../config/hashPAssword");
 const bcryptjs = require("bcryptjs");
 
+
+
+//api/user/ - post
 const registerUser = async (req, res) => {
     const { email, password, name, pic } = req.body;
 
@@ -39,6 +42,7 @@ const registerUser = async (req, res) => {
 
   
 }
+// api/user/login - post
 const authUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -63,7 +67,7 @@ const authUser = async (req, res) => {
     }
 };
 
-// query || api/user
+// query || api/user -get
 const allUsers = async(req,res)=>{
   
 const keyword = req.query.search?{
@@ -73,7 +77,7 @@ const keyword = req.query.search?{
 
     ]
 }:{}
-
+// all users except login user
 const users = await User.find(keyword).find({_id:{$ne:req.user._id}})
 res.send(users)
 }
