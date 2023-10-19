@@ -106,7 +106,12 @@ const renameGroup = async (req, res) => {
     const updatedChat = await Chat.findByIdAndUpdate(chatId, { chatName: chatName }, { new: true })
         .populate("users", "-password")
         .populate("groupAdmin", "-password");
-    res.status(200).send(updatedChat);
+         if (!updatedChat) {
+             res.status(404);
+             throw new Error("Chat Not Found");
+         } else {
+             res.json(updatedChat);
+         }
 };
 
 const addToGroup = async (req, res) => {

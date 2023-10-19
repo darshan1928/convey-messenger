@@ -11,7 +11,6 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    Text,
     useDisclosure,
     useToast,
 } from "@chakra-ui/react";
@@ -24,7 +23,7 @@ import UserBadgeItem from "../UserAvatar/UserBadgeItem";
 export default function GroupChatModal({ children }) {
     const OverlayOne = () => <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />;
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [overlay, setOverlay] = React.useState(<OverlayOne />);
+    const [overlay, setOverlay] = useState(<OverlayOne />);
     const [groupChatName, setGroupChatName] = useState();
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [search, setSearch] = useState("");
@@ -50,7 +49,7 @@ export default function GroupChatModal({ children }) {
 
             //api/user/  allUser  get
             const { data } = await axios.get(`http://localhost:8888/api/user?search=${search}`, config);
-            
+
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -76,39 +75,43 @@ export default function GroupChatModal({ children }) {
                 isClosable: true,
                 position: "top",
             });
-             return;
+            return;
         }
 
-          try {
-              const config = {
-                  headers: {
-                      Authorization: `Bearer ${user.token}`,
-                      "Access-Control-Allow-Origin": "http://localhost:8888/",
-                  },
-              }
-         
-              const { data } = await axios.post("http://localhost:8888/api/chat/group",{name:groupChatName,users:JSON.stringify(selectedUsers.map((u)=>u._id))}, config);
-              setChats([data,...chats])
-             
-              onClose()
-             toast({
-                 title: "New Group Created",
-            
-                 status: "success",
-                 duration: 5000,
-                 isClosable: true,
-                 position: "bottom-left",
-             });
-          } catch (error) {
-              toast({
-                  title: "Error Occurred",
-                  description: "Failed to Load the Chats",
-                  status: "warning",
-                  duration: 5000,
-                  isClosable: true,
-                  position: "bottom-left",
-              });
-          }
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                    "Access-Control-Allow-Origin": "http://localhost:8888/",
+                },
+            };
+
+            const { data } = await axios.post(
+                "http://localhost:8888/api/chat/group",
+                { name: groupChatName, users: JSON.stringify(selectedUsers.map((u) => u._id)) },
+                config
+            );
+            setChats([data, ...chats]);
+
+            onClose();
+            toast({
+                title: "New Group Created",
+
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-left",
+            });
+        } catch (error) {
+            toast({
+                title: "Error Occurred",
+                description: "Failed to Load the Chats",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-left",
+            });
+        }
     };
     const handleGroup = (userToAdd) => {
         if (selectedUsers.includes(userToAdd)) {

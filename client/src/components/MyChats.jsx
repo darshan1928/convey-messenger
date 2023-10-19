@@ -9,7 +9,7 @@ import ChatLoading from "../components/ChatLoading";
 import { getSender } from "../config/ChatLogics";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
 
-export default function MyChats() {
+export default function MyChats({fetchAgain}) {
     const [loggedUser, setLoggedUser] = useState();
     const { user, selectedChat, setSelectedChat, chats, setChats } = ChatState();
 
@@ -50,7 +50,7 @@ export default function MyChats() {
         }
 
         fetchChats();
-    }, []);
+    }, [fetchAgain]);
 
     return (
         <Box
