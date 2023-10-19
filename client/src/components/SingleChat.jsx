@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ChatState } from '../context/ChatProvider'
 import { Box, Text } from '@chakra-ui/layout'
-import { IconButton } from '@chakra-ui/react';
+import { IconButton, Image } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { getSender, getSenderFull } from "../config/ChatLogics";
 import ProfileModel from './miscellaneous/ProfileModel';
 import UpdateGroupChatModal from './miscellaneous/UpdateGroupChatModal';
 
 export default function SingleChat({fetchAgain,setFetchAgain}) {
+
+const [messages,setMessages]=useState()
+const [loading,setLoading]=useState()
+const [newMessages,setNewMessages]=useState()
+
+
 
   const  {selectedChat,user,setSelectedChat}= ChatState()
   return (
@@ -36,14 +42,24 @@ export default function SingleChat({fetchAgain,setFetchAgain}) {
                               <ProfileModel user={getSenderFull(user, selectedChat.users)} />
                           </>
                       ) : (
-                          <>{selectedChat?.chatName?.toUpperCase()}
-                          <UpdateGroupChatModal fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>
+                          <>
+                              {selectedChat?.chatName?.toUpperCase()}
+                              <UpdateGroupChatModal fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
                           </>
                       )}
                   </Text>
-                  <Box display="flex" justifyContent="flex-end" flexDir="column" p={3} bg="#E8e8e8" w="100%" h="100%" borderRadius="lg" overflowY="hidden">
-
-                    {/* Messages here */}
+                  <Box
+                      display="flex"
+                      justifyContent="flex-end"
+                      flexDir="column"
+                      p={3}
+                      bg="#E8e8e8"
+                      w="100%"
+                      h="100%"
+                      borderRadius="lg"
+                      overflowY="hidden"
+                  >
+                      {/* Messages here */}
                   </Box>
               </>
           ) : (
@@ -51,6 +67,7 @@ export default function SingleChat({fetchAgain,setFetchAgain}) {
                   <Text fontSize="3xl" pb={3} fontFamily="work sans" color="black">
                       Click on a User to Start Chatting
                   </Text>
+                 
               </Box>
           )}
       </>

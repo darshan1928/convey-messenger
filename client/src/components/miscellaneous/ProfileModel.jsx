@@ -19,11 +19,11 @@ export default function ProfileModel({ user, children }) {
     const OverlayOne = () => <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />;
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [overlay, setOverlay] = useState(<OverlayOne />);
-
+  
     return (
         <>
             {children ? (
-                <span onClick={onOpen}>{children}</span>
+                <span onClick={onOpen}>{children}</span>  
             ) : (
                 <IconButton d={{ base: "flex" }} icon={<ViewIcon />} onClick={onOpen} />
             )}
@@ -33,7 +33,7 @@ export default function ProfileModel({ user, children }) {
                     onOpen();
                 }}
             ></Button> */}
-            <Modal size="lg" isCentered isOpen={isOpen} onClose={onClose} isCentered>
+            <Modal size="lg" isCentered isOpen={isOpen} onClose={onClose} >
                 {overlay}
                 <ModalContent h='410px'>
                     <ModalHeader fontSize="40px" fontFamily="Work sans" display="flex" justifyContent="center">
