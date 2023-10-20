@@ -22,7 +22,7 @@ import UserBadgeItem from "../UserAvatar/UserBadgeItem";
 import axios from "axios";
 import UserListItem from "../UserAvatar/UserListItem";
 
-export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain }) {
+export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain, fetchMessages }) {
     const OverlayOne = () => <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />;
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [overlay, setOverlay] = useState(<OverlayOne />);
@@ -190,6 +190,7 @@ export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain }) {
 
             user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
             setFetchAgain(!fetchAgain);
+            fetchMessages()
             setLoading(false);
         } catch (error) {
             toast({
