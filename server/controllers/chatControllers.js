@@ -51,6 +51,7 @@ const accessChat = async (req, res) => {
 
 const fetchChat = async (req, res) => {
     try {
+       
         Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
             .populate("users", "-password")
             .populate("groupAdmin", "-password")
@@ -61,7 +62,7 @@ const fetchChat = async (req, res) => {
                     path: "latestMessage.sender",
                     select: "name pic email",
                 });
-
+                
                 res.status(200).send(results);
             });
     } catch (error) {

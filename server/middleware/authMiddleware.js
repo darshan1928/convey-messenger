@@ -20,7 +20,7 @@ const protect = async (req, res, next) => {
             
                 next();
             } catch (err) {
-                console.log("err==", err.message);
+                console.log("err====", err.message);
                 res.status(401)
                 throw new Error("Not authorized, token failed")
             }
@@ -28,7 +28,8 @@ const protect = async (req, res, next) => {
         if (!token){res.status(401);
             throw new Error("Not Authorized,no token")}
     } catch (err) {
-        console.log("err==", err.message);
+        console.log("inside auth middleware")
+        console.log("err===", err.message);
     }
 };
 

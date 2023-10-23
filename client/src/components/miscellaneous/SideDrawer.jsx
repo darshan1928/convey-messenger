@@ -130,7 +130,7 @@ export default function SideDrawer() {
                     </Button>
                 </Tooltip>
                 <Text fontSize="2xl" fontFamily="work sans">
-                    Convey Messenger
+                    CONVEY 
                 </Text>
                 <div>
                     <Menu>

@@ -28,7 +28,7 @@ export default function GroupChatModal({ children }) {
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [search, setSearch] = useState("");
     const [searchResult, setSearchResult] = useState([]);
-    const [state, setState] = useState(false);
+ 
     const toast = useToast();
     const [loading, setLoading] = useState(false);
     const { user, chats, setChats } = ChatState();
@@ -138,7 +138,7 @@ export default function GroupChatModal({ children }) {
                 display="flex"
                 fontSize={{ base: "17px", md: "10px", lg: "17px" }}
             >
-                Add to Group
+                Create Group
             </Button>
             <Modal isCentered isOpen={isOpen} onClose={onClose}>
                 {overlay}

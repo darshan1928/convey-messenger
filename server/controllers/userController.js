@@ -23,8 +23,8 @@ const registerUser = async (req, res) => {
           return;
       }
       const hashedPassword = await hashPassword(password);
- const token = generateToken(user._id);
       const user = await User.create({ name, email, password: hashedPassword, pic });
+      const token = generateToken(user._id);
      
 
       res.status(201).json({
@@ -36,6 +36,7 @@ const registerUser = async (req, res) => {
           
       });
   } catch (error) {
+   
       console.log("error==", error.message);
   }
 
@@ -63,7 +64,7 @@ const authUser = async (req, res) => {
          const token = generateToken(user._id);
         res.status(200).json({...userWithoutPassword,token});
     } catch (error) {
-        console.log("error==", error.message);
+        console.log("error=", error.message);
     }
 };
 

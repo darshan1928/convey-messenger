@@ -170,7 +170,7 @@ export default function SignUp() {
                         accept="image/**"
                         name="confirmPassword"
                         onChange={(e) => postDetails(e.target.files[0])}
-                        placeholder="Repeat Password"
+                        placeholder="Upload your Image"
                     />
                 </InputGroup>
             </FormControl>

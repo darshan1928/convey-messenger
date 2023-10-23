@@ -4,7 +4,7 @@ import { Stack, Text, useToast } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/layout";
 
 import axios from "axios";
-
+import { AddIcon } from "@chakra-ui/icons";
 import ChatLoading from "../components/ChatLoading";
 import { getSender } from "../config/ChatLogics";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
@@ -29,7 +29,7 @@ export default function MyChats({ fetchAgain }) {
 
             setChats(data);
 
-          
+            console.log("chats==", chats);
         } catch (error) {
             toast({
                 title: "Error Occurred",
@@ -87,32 +87,24 @@ export default function MyChats({ fetchAgain }) {
             <Box display="flex" flexDir="column" p={3} w="100%" h="100%" bg="#F8F8F8" borderRadius="1g" overflowY="hidden">
                 {chats ? (
                     <Stack overflowY="scroll">
-                        {chats.map((chat) => {
-                            const sender =
-                                chat?.isGroupChat === "false" ? getSender(loggedUser, chat.users) : chat?.chatName;
-
-                            // Check if sender is not empty before rendering the Box component
-                            if (sender) {
-                                return (
-                                    <Box
-                                        key={chat._id}
-                                        color={selectedChat === chat ? "white" : "black"}
-                                        px={3}
-                                        onClick={() => setSelectedChat(chat)}
-                                        py={2}
-                                        w="100%"
-                                        h="100%"
-                                        bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
-                                        cursor="pointer"
-                                        borderRadius="lg"
-                                    >
-                                        <Text>{sender}</Text>
-                                    </Box>
-                                );
-                            }
-
-                            return null; // Don't render anything if sender is empty
-                        })}
+                        {chats.map((chat) => (
+                            <Box
+                                key={chat._id}
+                                color={selectedChat === chat ? "white" : "black"}
+                                px={3}
+                                onClick={() => setSelectedChat(chat)}
+                                py={2}
+                                w="100%"
+                                h="100%"
+                                bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
+                                cursor="pointer"
+                                borderRadius="lg"
+                            >
+                                <Text>
+                                    {chat?.isGroupChat === "false" ? getSender(loggedUser, chat.users) : chat?.chatName}
+                                </Text>
+                            </Box>
+                        ))}
                     </Stack>
                 ) : (
                     <ChatLoading />

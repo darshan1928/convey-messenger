@@ -135,6 +135,9 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
                         borderRadius="lg"
                         overflowY="hidden"
                     >
+                        {/* chat will display here */}
+
+
                         {loading ? (
                             <Spinner size="xl" w={20} h={20} alignSelf="center" margin="auto" />
                         ) : (
@@ -142,7 +145,6 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
                                 <ScrollableChat messages={messages} />
                             </div>
                         )}
-
                         <FormControl onKeyDown={sendMessage}>
                             <Input
                                 color="black"

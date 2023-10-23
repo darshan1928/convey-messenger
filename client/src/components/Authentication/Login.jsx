@@ -30,7 +30,8 @@ export default function Login() {
                 position: "bottom",
             });
 
-            setUser(data);
+            setUser(response.data);
+           
             localStorage.setItem("userInfo", JSON.stringify(response.data));
             setTimeout(() => {
                 navigate("/chats");

@@ -17,7 +17,7 @@ import {
     useDisclosure,
     useToast,
 } from "@chakra-ui/react";
-import { ViewIcon } from "@chakra-ui/icons";
+import { SettingsIcon, ViewIcon } from "@chakra-ui/icons";
 import UserBadgeItem from "../UserAvatar/UserBadgeItem";
 import axios from "axios";
 import UserListItem from "../UserAvatar/UserListItem";
@@ -210,7 +210,7 @@ export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain, fetchM
         <>
             <IconButton
                 display={{ base: "flex" }}
-                icon={<ViewIcon />}
+                icon={<SettingsIcon />}
                 ml="4"
                 onClick={() => {
                     setOverlay(<OverlayOne />);

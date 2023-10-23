@@ -24,4 +24,4 @@ app.use('*',(req,res)=>{
 res.json({errorCode:"5",message:"Wrong url"})
 })
 
-app.listen(PORT, () => console.log(`Server running @${PORT}`.yellow.bold));
+const server = app.listen(PORT, () => console.log(`Server running @${PORT}`.yellow.bold));
