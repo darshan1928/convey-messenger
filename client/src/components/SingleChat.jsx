@@ -9,6 +9,22 @@ import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import axios from "axios";
 import "./styles.css";
 import ScrollableChat from "./ScrollableChat";
+import io from "socket.io-client";
+import  Lottie  from "react-lottie";
+import animationData from "../animations/typing.json"
+
+const ENDPOINT = "http://localhost:8888";
+var socket, selectedChatCompare;
+
+
+const defaultOptions= {
+    loop:true,
+    autoplay:true,
+    animationData:  animationData,
+    renderSettings:{
+        preserveAspectRatio:"xMidYMid slice"
+    }
+}
 
 export default function SingleChat({ fetchAgain, setFetchAgain }) {
     const [messages, setMessages] = useState([]);
@@ -17,6 +33,12 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
 
     const toast = useToast();
     const { selectedChat, user, setSelectedChat } = ChatState();
+
+    //socket io state
+    const [socketConnected, setSocketConnected] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
+    const [typing, setTyping] = useState(false);
+    const [timerId, setTimerId] = useState(null)
 
     const fetchMessages = async () => {
         if (!selectedChat) {
@@ -39,6 +61,7 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
 
             setMessages(data);
             setLoading(false);
+            socket.emit("join chat", selectedChat._id);
         } catch (error) {
             toast({
                 title: "Error Occurred",
@@ -52,11 +75,31 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
     };
 
     useEffect(() => {
+        socket = io(ENDPOINT);
+        socket.emit("setup", user);
+        socket.on("connected", () => setSocketConnected(true));
+        socket.on("typing", () => setIsTyping(true));
+        socket.on("stop typing", () => setIsTyping(false));
+    }, []);
+
+    useEffect(() => {
         fetchMessages();
+        selectedChatCompare = selectedChat;
     }, [selectedChat]);
+
+    useEffect(() => {
+        socket.on("message received", (newMessageReceived) => {
+            if (!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id) {
+                //give notification
+            } else {
+                setMessages([...messages, newMessageReceived]);
+            }
+        });
+    });
 
     const sendMessage = async (event) => {
         if (event.key === "Enter" && newMessage) {
+            socket.emit("stop typing", selectedChat._id);
             try {
                 const config = {
                     headers: {
@@ -70,7 +113,7 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
                     { content: newMessage, chatId: selectedChat._id },
                     config
                 );
-
+                socket.emit("new message", data);
                 setMessages([...messages, data]);
             } catch (error) {
                 toast({
@@ -87,7 +130,50 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
 
     const typingHandler = (e) => {
         setNewMessage(e.target.value);
+
+        if (!socketConnected) return;
+
+        if (!typing) {
+            setTyping(true);
+            socket.emit("typing", selectedChat._id);
+        }
+       
+        var timerLength = 3000;
+      if(timerId){
+        clearTimeout(timerId)
+      }
+      let timer = setTimeout(()=>{
+        socket.emit("stop typing",selectedChat._id)
+        setTyping(false)
+      },timerLength)
+
+      setTimerId(timer)
     };
+
+//OR
+
+// const typingHandler = (e) => {
+//     setNewMessage(e.target.value);
+
+//     if (!socketConnected) return;
+
+//     if (!typing) {
+//         setTyping(true);
+//         socket.emit("typing", selectedChat._id);
+//     }
+//     let lastTypingTime = new Date().getTime();
+//     var timerLength = 3000;
+//     setTimeout(() => {
+//         var timeNow = new Date().getTime();
+//         var timeDiff = timeNow - lastTypingTime;
+
+//         if (timeDiff >= timerLength && typing) {
+//             socket.emit("stop typing", selectedChat._id);
+//             setTyping(false);
+//         }
+//     }, timerLength);
+// };
+
     return (
         <>
             {selectedChat ? (
@@ -137,7 +223,6 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
                     >
                         {/* chat will display here */}
 
-
                         {loading ? (
                             <Spinner size="xl" w={20} h={20} alignSelf="center" margin="auto" />
                         ) : (
@@ -145,7 +230,16 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
                                 <ScrollableChat messages={messages} />
                             </div>
                         )}
-                        <FormControl onKeyDown={sendMessage}>
+                        <FormControl isRequired mt={3} onKeyDown={sendMessage}>
+                            {isTyping ? <div>
+                                <Lottie 
+                                
+                                
+                                width={70}
+                                options={defaultOptions}
+                                style={{marginBottom:15,marginLeft:0}}/>
+                            </div> : <></>}
+
                             <Input
                                 color="black"
                                 variant="filled"
