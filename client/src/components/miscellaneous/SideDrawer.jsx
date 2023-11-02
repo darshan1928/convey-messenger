@@ -13,6 +13,7 @@ import {
     MenuList,
     Spinner,
     Tooltip,
+    
     useDisclosure,
     useToast,
 } from "@chakra-ui/react";
@@ -28,9 +29,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ChatLoading from "../ChatLoading";
 import UserListItem from "../UserAvatar/UserListItem";
+import { getSender } from "../../config/ChatLogics";
+import "./sideDrawer.css"
 
 export default function SideDrawer() {
-    const { user, setSelectedChat, chats, setChats, selectedChat } = ChatState();
+    const { user, setSelectedChat, chats, setChats, selectedChat ,notification,setNotification} = ChatState();
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const navigate = useNavigate();
@@ -56,6 +59,7 @@ export default function SideDrawer() {
         }
 
         try {
+            console.log(user.token,"user.token");
             setLoading(true);
             const config = {
                 headers: {
@@ -81,6 +85,7 @@ export default function SideDrawer() {
 
     //accessing to all user except login user
     const accessChat = async (userId) => {
+        
         try {
             setLoadingChat(true);
             const config = {
@@ -93,7 +98,7 @@ export default function SideDrawer() {
             //    selected user details = data
             //   api/chat post-  accessChat
             const { data } = await axios.post("http://localhost:8888/api/chat", { userId }, config);
-               console.log(data);
+             
             if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]); // confusing
 
             setSelectedChat(data);
@@ -130,14 +135,34 @@ export default function SideDrawer() {
                     </Button>
                 </Tooltip>
                 <Text fontSize="2xl" fontFamily="work sans">
-                    CONVEY 
+                    CONVEY
                 </Text>
                 <div>
                     <Menu>
                         <MenuButton p={1}>
+                            <div className="notification-badge">
+                                <span style={{ display: notification.length == 0 ? "none" : "block" }} className="badge">
+                                    {notification.length}
+                                </span>
+                            </div>
                             <BellIcon fontSize="2xl" m={1} />
                         </MenuButton>
-                        {/* <MenuList></MenuList> */}
+                        <MenuList pl={2}>
+                            {!notification.length && "No New Messages"}
+                            {notification.map((notify) => (
+                                <MenuItem
+                                    key={notify._id}
+                                    onClick={() => {
+                                        setSelectedChat(notify.chat);
+                                        setNotification(notification.filter((n) => n !== notify));
+                                    }}
+                                >
+                                    {notify.chat.isGroupChat
+                                        ? `New Message in ${notify.chat.chatName}`
+                                        : `New Message from ${getSender(user, notify.chat.users)}`}
+                                </MenuItem>
+                            ))}
+                        </MenuList>
                     </Menu>
                     <Menu>
                         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>

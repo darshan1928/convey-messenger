@@ -23,10 +23,16 @@ const registerUser = async (req, res) => {
           return;
       }
       const hashedPassword = await hashPassword(password);
-      const user = await User.create({ name, email, password: hashedPassword, pic });
-      const token = generateToken(user._id);
+       const picValue = pic || "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
+      const user = await User.create({ name, email, password: hashedPassword ,pic: picValue});
      
-
+      const token =  generateToken(user._id);
+     
+     console.log( {_id: user.id,
+          name: user.name,
+          email: user.email,
+          pic: user.pic,
+          token})
       res.status(201).json({
           _id: user.id,
           name: user.name,
@@ -62,6 +68,7 @@ const authUser = async (req, res) => {
         const userWithoutPassword = { ...user._doc };
         delete userWithoutPassword.password;
          const token = generateToken(user._id);
+         console.log("token==",token);
         res.status(200).json({...userWithoutPassword,token});
     } catch (error) {
         console.log("error=", error.message);

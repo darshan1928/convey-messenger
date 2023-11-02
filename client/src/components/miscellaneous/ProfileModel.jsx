@@ -19,7 +19,7 @@ export default function ProfileModel({ user, children }) {
     const OverlayOne = () => <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />;
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [overlay, setOverlay] = useState(<OverlayOne />);
-  
+ 
     return (
         <>
             {children ? (

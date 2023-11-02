@@ -6,19 +6,32 @@ const ChatProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [selectedChat, setSelectedChat] = useState();
     const [chats, setChats] = useState([]);
+    const [notification,setNotification]=useState([])
     const navigate = useNavigate();
 
     useEffect(() => {
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        setUser(userInfo);
-  
-        if (!userInfo) {
-            navigate("/");
-        }
+
+
+        const userInfo = localStorage.getItem("userInfo")
+          if (userInfo) {
+            try {
+                console.log(userInfo);
+                const  data = JSON.parse(userInfo);
+                console.log("data==", data);
+                setUser(data);
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+                
+            }
+          } else {
+              navigate("/");
+          }
+       
+    
     }, [navigate]);
 
     return (
-        <ChatContext.Provider value={{ user, setUser, selectedChat, setSelectedChat, chats, setChats }}>
+        <ChatContext.Provider value={{notification,setNotification, user, setUser, selectedChat, setSelectedChat, chats, setChats }}>
             {children}
         </ChatContext.Provider>
     );

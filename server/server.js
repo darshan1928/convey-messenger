@@ -37,7 +37,7 @@ io.on("connection", (socket) => {
     console.log("connected to socket.io");
     socket.on("setup", (userData) => {
         socket.join(userData._id);
-        console.log("userData._id===", userData._id);
+
         socket.emit("connected");
     });
 
@@ -59,5 +59,10 @@ io.on("connection", (socket) => {
             if (user._id == newMessageReceived.sender._id) return;
             socket.in(user._id).emit("message received", newMessageReceived);
         });
+    });
+
+    socket.off("setup", (room) => {
+        console.log("USER DISCONNECTED");
+        socket.leave(userData._id);
     });
 });

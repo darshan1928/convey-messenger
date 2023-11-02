@@ -5,8 +5,10 @@ if (!users || users.length !== 2 || !loggedUser) {
     return  ;
 }
 if (users[0]?._id === loggedUser?._id) {
+ 
     return users[1].name;
 } else {
+   
     return users[0].name;
 }
 

@@ -32,7 +32,7 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
     const [newMessage, setNewMessage] = useState();
 
     const toast = useToast();
-    const { selectedChat, user, setSelectedChat } = ChatState();
+    const { selectedChat, user, setSelectedChat, notification, setNotification } = ChatState();
 
     //socket io state
     const [socketConnected, setSocketConnected] = useState(false);
@@ -87,11 +87,16 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
         selectedChatCompare = selectedChat;
     }, [selectedChat]);
 
+  
+
     useEffect(() => {
         socket.on("message received", (newMessageReceived) => {
             if (!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id) {
                 //give notification
-            } else {
+                if(!notification.includes(newMessageReceived)) {
+                setNotification([newMessageReceived,...notification])
+                setFetchAgain(!fetchAgain)
+            } }else {
                 setMessages([...messages, newMessageReceived]);
             }
         });

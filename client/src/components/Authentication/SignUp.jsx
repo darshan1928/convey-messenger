@@ -90,8 +90,8 @@ export default function SignUp() {
                 position: "bottom",
             });
             localStorage.setItem("userInfo", JSON.stringify(response));
-            console.log(response.token);
-            console.log(response);
+       
+         
             setLoading(false);
            
             setTimeout(() => {

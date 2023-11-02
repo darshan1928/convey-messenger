@@ -16,6 +16,7 @@ export default function MyChats({ fetchAgain }) {
     const toast = useToast();
 
     const fetchChats = async () => {
+        
         try {
             const config = {
                 headers: {
