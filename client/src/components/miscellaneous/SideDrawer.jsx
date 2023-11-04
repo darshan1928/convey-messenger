@@ -5,6 +5,7 @@ import {
     DrawerContent,
     DrawerHeader,
     DrawerOverlay,
+    Image,
     Input,
     Menu,
     MenuButton,
@@ -134,9 +135,17 @@ export default function SideDrawer() {
                         </Text>
                     </Button>
                 </Tooltip>
-                <Text fontSize="2xl" fontFamily="work sans">
+                {/* <Text fontSize="2xl" fontFamily="work sans">
                     CONVEY
-                </Text>
+                </Text> */}
+                <Image
+                    objectFit="cover"
+                    
+                    boxSize="50px"
+                    width="120px"
+                    src="../../../public/convey-logo.png"
+                    alt="logo"
+                />
                 <div>
                     <Menu>
                         <MenuButton p={1}>
@@ -157,8 +166,7 @@ export default function SideDrawer() {
                                         setNotification(notification.filter((n) => n !== notify));
                                     }}
                                 >
-                                  
-                                    {notify.chat.isGroupChat ==='true'
+                                    {notify.chat.isGroupChat === "true"
                                         ? `New Message in ${notify.chat.chatName}`
                                         : `New Message from ${getSender(user, notify.chat.users)}`}
                                 </MenuItem>
