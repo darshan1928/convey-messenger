@@ -32,6 +32,8 @@ import ChatLoading from "../ChatLoading";
 import UserListItem from "../UserAvatar/UserListItem";
 import { getSender } from "../../config/ChatLogics";
 import {TbUserSearch} from "react-icons/tb"
+import { RiLogoutCircleRLine } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
 import "./sideDrawer.css"
 
 export default function SideDrawer() {
@@ -173,10 +175,16 @@ export default function SideDrawer() {
                         </MenuButton>
                         <MenuList>
                             <ProfileModel user={user}>
-                                <MenuItem>My Profile</MenuItem>
+                                <MenuItem>
+                                    <CgProfile style={{ marginRight: "5px" }} />
+                                    Profile
+                                </MenuItem>
                             </ProfileModel>
                             <MenuDivider />
-                            <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+                            <MenuItem onClick={logoutHandler}>
+                                <RiLogoutCircleRLine style={{ marginRight: "5px" }} />
+                                Logout
+                            </MenuItem>
                         </MenuList>
                     </Menu>
                 </div>

@@ -199,7 +199,7 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
                             icon={<ArrowBackIcon />}
                             onClick={() => setSelectedChat("")}
                         />
-                        {selectedChat.isGroupChat ? (
+                        {selectedChat.isGroupChat==="false" ? (
                             <>
                                 {getSender(user, selectedChat.users)}
                                 <ProfileModel user={getSenderFull(user, selectedChat.users)} />

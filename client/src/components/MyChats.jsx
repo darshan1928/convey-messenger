@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { ChatState } from "../context/ChatProvider";
-import { Stack, Text, useToast } from "@chakra-ui/react";
-import { Box } from "@chakra-ui/layout";
+import { Avatar, Stack, Text, useToast } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/layout";
 
 import axios from "axios";
 
 import ChatLoading from "../components/ChatLoading";
-import { getSender } from "../config/ChatLogics";
+import { getSender, senderPic } from "../config/ChatLogics";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
 
-
+import { FaUserGroup } from "react-icons/fa6";
 export default function MyChats({ fetchAgain }) {
     const [loggedUser, setLoggedUser] = useState();
     const { user, selectedChat, setSelectedChat, chats, setChats } = ChatState();
@@ -17,7 +17,6 @@ export default function MyChats({ fetchAgain }) {
     const toast = useToast();
 
     const fetchChats = async () => {
-        
         try {
             const config = {
                 headers: {
@@ -30,8 +29,6 @@ export default function MyChats({ fetchAgain }) {
             const { data } = await axios.get("http://localhost:8888/api/chat", config);
 
             setChats(data);
-
-          
         } catch (error) {
             toast({
                 title: "Error Occurred",
@@ -78,9 +75,7 @@ export default function MyChats({ fetchAgain }) {
                 justifyContent="space-between"
                 alignItems="center"
             >
-               
-                     Chats
-                
+                Chats
                 <GroupChatModal />
                 {/* 
                 <Button rightIcon={<AddIcon />} display="flex" fontSize={{ base: "17px", md: "10px", lg: "17px" }}>
@@ -99,6 +94,8 @@ export default function MyChats({ fetchAgain }) {
                             if (sender) {
                                 return (
                                     <Box
+                                        display="flex"
+                                        flexDir="row"
                                         key={chat._id}
                                         color={selectedChat === chat ? "white" : "black"}
                                         px={3}
@@ -110,7 +107,26 @@ export default function MyChats({ fetchAgain }) {
                                         cursor="pointer"
                                         borderRadius="lg"
                                     >
-                                        <Text>{sender}</Text>
+                                        {chat?.isGroupChat === "false" ? (
+                                            <Flex alignItems="center">
+                                                <Avatar
+                                                    size="sm"
+                                                    src={senderPic(loggedUser, chat.users)}
+                                                    cursor="pointer"
+                                                />
+                                                <Text marginLeft="5px">{sender}</Text>
+                                            </Flex>
+                                        ) : (
+                                            <Flex alignItems="center">
+                                                <Avatar
+                                                    size="sm"
+                                                    icon={<FaUserGroup  fontSize="1.5rem" />}
+                                                    cursor="pointer"
+                                                />
+                                              
+                                                <Text marginLeft="5px">{sender}</Text>
+                                            </Flex>
+                                        )}
                                     </Box>
                                 );
                             }

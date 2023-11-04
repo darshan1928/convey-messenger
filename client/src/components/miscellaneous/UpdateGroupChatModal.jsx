@@ -21,7 +21,8 @@ import { SettingsIcon, ViewIcon } from "@chakra-ui/icons";
 import UserBadgeItem from "../UserAvatar/UserBadgeItem";
 import axios from "axios";
 import UserListItem from "../UserAvatar/UserListItem";
-
+import {BiSolidExit} from "react-icons/bi"
+import { FaPeopleGroup } from "react-icons/fa6";
 export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain, fetchMessages }) {
     const OverlayOne = () => <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />;
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -222,7 +223,9 @@ export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain, fetchM
                 {overlay}
                 <ModalContent>
                     <ModalHeader fontSize="35px" fontFamily="Work sans" display="flex" justifyContent="center">
-                        {selectedChat.chatName}
+                        <span style={{display:"flex",flexDirection:"row",alignItems:"center"}}>
+                            <FaPeopleGroup style={{ marginRight: "10px" }} /> {selectedChat.chatName}
+                        </span>
                     </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
@@ -238,7 +241,7 @@ export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain, fetchM
                         </Box>
                         <FormControl display="flex">
                             <Input
-                                placeholder="Chat Name"
+                                placeholder="Change Group Name"
                                 value={groupChatName}
                                 mb={3}
                                 onChange={(e) => setGroupChatName(e.target.value)}
@@ -256,7 +259,11 @@ export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain, fetchM
                             </Button>
                         </FormControl>
                         <FormControl display="flex">
-                            <Input placeholder="Add User to Group" mb={1} onChange={(e) => handleSearch(e.target.value)} />
+                            <Input
+                                placeholder="Add More Participants"
+                                mb={1}
+                                onChange={(e) => handleSearch(e.target.value)}
+                            />
                         </FormControl>
                         {loading ? (
                             <Spinner size="lg" />
@@ -268,7 +275,7 @@ export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain, fetchM
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={() => handleRemove(user)} colorScheme="red">
-                            Leave Group
+                            <BiSolidExit size={"1.5em"} /> Leave Group
                         </Button>
                     </ModalFooter>
                 </ModalContent>
