@@ -7,7 +7,7 @@ export default function UserBadgeItem({user,handleFunction}) {
         <Box
             px={2}
             py={1}
-            borderRadius={'lg'}
+            borderRadius={"lg"}
             m={1}
             mb={2}
             variant="solid"
@@ -19,8 +19,8 @@ export default function UserBadgeItem({user,handleFunction}) {
             backgroundColor="purple"
             color="white"
         >
-{user.name}
-<CloseIcon pl={1}/>
+            {user.name}
+            <CloseIcon pl={1} />
         </Box>
     );
 }

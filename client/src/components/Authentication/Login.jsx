@@ -77,8 +77,15 @@ export default function Login() {
                     </InputGroup>
                 </FormControl>
 
-                <Button colorScheme="blue" width="100%" color="white" onClick={handleSubmit} style={{ marginTop: 15 }}>
-                    Login
+                <Button
+                    bg="black"
+                    borderRadius="full"
+                    width="100%"
+                    color="white"
+                    onClick={handleSubmit}
+                    style={{ marginTop: 15 }}
+                >
+                    LOGIN
                 </Button>
             </VStack>
         </div>

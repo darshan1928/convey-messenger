@@ -10,7 +10,8 @@
 .App{
     min-height: 100vh;
     display :flex;
-   background: grey;
+    background-image: url("../public//bg-two.jpg");
+   background-size: cover;
    color:black;
    background-position: center;
 }

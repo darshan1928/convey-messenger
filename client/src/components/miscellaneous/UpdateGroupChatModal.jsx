@@ -223,7 +223,7 @@ export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain, fetchM
                 {overlay}
                 <ModalContent>
                     <ModalHeader fontSize="35px" fontFamily="Work sans" display="flex" justifyContent="center">
-                        <span style={{display:"flex",flexDirection:"row",alignItems:"center"}}>
+                        <span style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                             <FaPeopleGroup style={{ marginRight: "10px" }} /> {selectedChat.chatName}
                         </span>
                     </ModalHeader>
@@ -249,7 +249,7 @@ export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain, fetchM
 
                             <Button
                                 variant="solid"
-                                colorScheme="teal"
+                                colorScheme="gray"
                                 placeholder="Add Users"
                                 ml={1}
                                 isLoading={renameLoading}
@@ -274,8 +274,13 @@ export default function UpdateGroupChatModal({ fetchAgain, setFetchAgain, fetchM
                         )}
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={() => handleRemove(user)} colorScheme="red">
-                            <BiSolidExit size={"1.5em"} /> Leave Group
+                        <Button
+                            variant="solid"
+                            leftIcon={<BiSolidExit size={"1.5em"} />}
+                            onClick={() => handleRemove(user)}
+                            colorScheme="gray"
+                        >
+                            Exit Group
                         </Button>
                     </ModalFooter>
                 </ModalContent>

@@ -181,10 +181,10 @@ export default function GroupChatModal({ children }) {
                     </ModalBody>
                     <ModalFooter>
                         <Button m={2} onClick={handleSubmit}>
-                            Save <PiCheckSquareFill color={"#29BF5E"} size={"2em"} />
+                            CREATE
                         </Button>
 
-                        <Button onClick={onClose}>Close</Button>
+                        <Button onClick={onClose}>CLOSE</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

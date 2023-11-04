@@ -34,6 +34,7 @@ import { getSender } from "../../config/ChatLogics";
 import {TbUserSearch} from "react-icons/tb"
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import "./sideDrawer.css"
 
 export default function SideDrawer() {
@@ -170,7 +171,7 @@ export default function SideDrawer() {
                         </MenuList>
                     </Menu>
                     <Menu>
-                        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                        <MenuButton as={Button} rightIcon={<BsThreeDotsVertical style={{ fontSize: "23px" }} />}>
                             <Avatar size="sm" name={user.name} src={user.pic} cursor="pointer" />
                         </MenuButton>
                         <MenuList>

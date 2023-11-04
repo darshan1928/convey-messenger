@@ -8,12 +8,10 @@ import Homepage from "./pages/Homepage";
 
 export default function App() {
     return (
-        <div className="App">
+        <div  className="App">
             <Routes>
                 <Route path="/" element={<Homepage />} />
-                {/* <Route path="/signin" element={<SignIn />} />
-                    <Route path="/signup" element={<SignUp />} />
-                    <Route path="/about" element={<About />} /> */}
+               
 
                 <Route path="/chats" element={<Chatpage />} />
             </Routes>

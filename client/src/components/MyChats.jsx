@@ -97,7 +97,7 @@ export default function MyChats({ fetchAgain }) {
                                         display="flex"
                                         flexDir="row"
                                         key={chat._id}
-                                        color={selectedChat === chat ? "white" : "black"}
+                                        color={selectedChat === chat ? "#FFF" : "black"}
                                         px={3}
                                         onClick={() => setSelectedChat(chat)}
                                         py={2}

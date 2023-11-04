@@ -175,14 +175,15 @@ export default function SignUp() {
                 </InputGroup>
             </FormControl>
             <Button
-                colorScheme="blue"
+                bg="black"
+                borderRadius="full"
                 width="100%"
                 color="white"
                 style={{ marginTop: 15 }}
                 isLoading={loading}
                 onClick={submitHandler}
             >
-                Sign Up
+                SIGN UP
             </Button>
         </VStack>
     );
