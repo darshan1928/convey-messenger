@@ -19,7 +19,9 @@ import { ChatState } from "../../context/ChatProvider";
 import axios from "axios";
 import UserListItem from "../UserAvatar/UserListItem";
 import UserBadgeItem from "../UserAvatar/UserBadgeItem";
-
+import { MdGroupAdd } from "react-icons/md";
+import { PiCheckSquareFill } from "react-icons/pi";
+import { MdGroup } from "react-icons/md";
 export default function GroupChatModal({ children }) {
     const OverlayOne = () => <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />;
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,7 +30,7 @@ export default function GroupChatModal({ children }) {
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [search, setSearch] = useState("");
     const [searchResult, setSearchResult] = useState([]);
- 
+
     const toast = useToast();
     const [loading, setLoading] = useState(false);
     const { user, chats, setChats } = ChatState();
@@ -134,25 +136,34 @@ export default function GroupChatModal({ children }) {
                     setOverlay(<OverlayOne />);
                     onOpen();
                 }}
-                rightIcon={<AddIcon />}
+                rightIcon={<MdGroupAdd size={"1.5em"} />}
                 display="flex"
                 fontSize={{ base: "17px", md: "10px", lg: "17px" }}
             >
-                Create Group
+                New Group
             </Button>
             <Modal isCentered isOpen={isOpen} onClose={onClose}>
                 {overlay}
                 <ModalContent>
-                    <ModalHeader fontSize="35px" fontFamily="Work sans" display="flex" justifyContent="center">
-                        Create Group chat
+                    <ModalHeader
+                        fontSize="35px"
+                        fontFamily="Work sans"
+                        display="flex"
+                        textAlign="center"
+                        justifyContent="center"
+                    >
+                        <span style={{ display: "flex", padding:"10px", alignItems: "center" }}>
+                            <MdGroup />
+                        </span>
+                        Create Group
                     </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody display="flex" flexDir="column" alignItems="center">
                         <FormControl>
-                            <Input placeholder="Chat Name" mb={3} onChange={(e) => setGroupChatName(e.target.value)} />
+                            <Input placeholder="Group Name" mb={3} onChange={(e) => setGroupChatName(e.target.value)} />
                         </FormControl>
                         <FormControl>
-                            <Input placeholder="Add Users" mb={1} onChange={(e) => handleSearch(e.target.value)} />
+                            <Input placeholder="Add Participants" mb={1} onChange={(e) => handleSearch(e.target.value)} />
                         </FormControl>
                         <Box w="100%" display="flex" flexWrap="wrap">
                             {selectedUsers.map((user) => (
@@ -169,7 +180,10 @@ export default function GroupChatModal({ children }) {
                         )}
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={handleSubmit}>Save</Button>
+                        <Button m={2} onClick={handleSubmit}>
+                            Save <PiCheckSquareFill color={"#29BF5E"} size={"2em"} />
+                        </Button>
+
                         <Button onClick={onClose}>Close</Button>
                     </ModalFooter>
                 </ModalContent>

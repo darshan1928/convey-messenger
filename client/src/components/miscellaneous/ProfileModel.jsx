@@ -43,7 +43,7 @@ export default function ProfileModel({ user, children }) {
                     <ModalBody display="flex" flexDir="column" alignItems="center" justifyContent="space-between">
                         <Image borderRadius="full" boxSize="150px" src={user.pic} alt={user.name} />
                         <Text fontFamily="Work sans" fontSize={{ base: "28px", md: "30px" }}>
-                            Email:{user.email}
+                            Email : {user.email}
                         </Text>
                     </ModalBody>
                     <ModalFooter>

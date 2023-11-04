@@ -31,6 +31,7 @@ import axios from "axios";
 import ChatLoading from "../ChatLoading";
 import UserListItem from "../UserAvatar/UserListItem";
 import { getSender } from "../../config/ChatLogics";
+import {TbUserSearch} from "react-icons/tb"
 import "./sideDrawer.css"
 
 export default function SideDrawer() {
@@ -138,14 +139,7 @@ export default function SideDrawer() {
                 {/* <Text fontSize="2xl" fontFamily="work sans">
                     CONVEY
                 </Text> */}
-                <Image
-                    objectFit="cover"
-                    
-                    boxSize="50px"
-                    width="120px"
-                    src="../../../public/convey-logo.png"
-                    alt="logo"
-                />
+                <Image objectFit="cover" boxSize="50px" width="120px" src="../../../public/convey-logo.png" alt="logo" />
                 <div>
                     <Menu>
                         <MenuButton p={1}>
@@ -194,12 +188,14 @@ export default function SideDrawer() {
                     <DrawerBody>
                         <Box p={2} display="flex">
                             <Input
-                                placeholder="Search by name or email"
+                                placeholder="Search name or email..."
                                 mr={2}
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
-                            <Button onClick={handleSearch}>Go</Button>
+                            <Button onClick={handleSearch}>
+                                <TbUserSearch size={"2em"} />
+                            </Button>
                         </Box>
                         {loading ? (
                             <ChatLoading />

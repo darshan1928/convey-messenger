@@ -236,14 +236,17 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
                             </div>
                         )}
                         <FormControl isRequired mt={3} onKeyDown={sendMessage}>
-                            {isTyping ? <div>
-                                <Lottie 
-                                
-                                
-                                width={70}
-                                options={defaultOptions}
-                                style={{marginBottom:15,marginLeft:0}}/>
-                            </div> : <></>}
+                            {isTyping ? (
+                                <div>
+                                    <Lottie
+                                        width={70}
+                                        options={defaultOptions}
+                                        style={{ marginBottom: 15, marginLeft: 0 }}
+                                    />
+                                </div>
+                            ) : (
+                                <></>
+                            )}
 
                             <Input
                                 color="black"
@@ -259,7 +262,8 @@ export default function SingleChat({ fetchAgain, setFetchAgain }) {
             ) : (
                 <Box display="flex" alignItems="center" h="100%">
                     <Text fontSize="3xl" pb={3} fontFamily="work sans" color="black">
-                        Click on a User to Start Chatting
+                        Bringing Conversations to Life......
+                       
                     </Text>
                 </Box>
             )}

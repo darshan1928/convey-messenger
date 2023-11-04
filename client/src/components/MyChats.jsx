@@ -9,6 +9,7 @@ import ChatLoading from "../components/ChatLoading";
 import { getSender } from "../config/ChatLogics";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
 
+
 export default function MyChats({ fetchAgain }) {
     const [loggedUser, setLoggedUser] = useState();
     const { user, selectedChat, setSelectedChat, chats, setChats } = ChatState();
@@ -77,7 +78,9 @@ export default function MyChats({ fetchAgain }) {
                 justifyContent="space-between"
                 alignItems="center"
             >
-                My Chats
+               
+                     Chats
+                
                 <GroupChatModal />
                 {/* 
                 <Button rightIcon={<AddIcon />} display="flex" fontSize={{ base: "17px", md: "10px", lg: "17px" }}>
