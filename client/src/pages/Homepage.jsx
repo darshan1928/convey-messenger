@@ -17,6 +17,7 @@ export default function Homepage() {
     return (
         <Container maxW="xl" centerContent>
             <Box
+                boxShadow="base"
                 display="flex"
                 justifyContent="center"
                 bg="#ffff"
@@ -38,7 +39,7 @@ export default function Homepage() {
                 </Text> */}
             </Box>
 
-            <Box bg={"#fff"} w="100%" p={4} color="black" borderRadius="lg" borderWidth="1px">
+            <Box boxShadow="md" bg={"#fff"} w="100%" p={4} color="black" rounded="2xl" borderWidth="1px">
                 <Tabs colorScheme="blackAlpha" variant="soft-rounded">
                     <TabList mb="1em">
                         <Tab w="50%">LOGIN</Tab>

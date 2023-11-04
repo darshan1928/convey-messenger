@@ -12,7 +12,7 @@ export default function UserBadgeItem({user,handleFunction}) {
             mb={2}
             variant="solid"
             fontSize={12}
-            colorScheme="purple"
+           
             cursor="pointer"
             onClick={handleFunction}
             borderWidth="5px"
