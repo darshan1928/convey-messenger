@@ -15,9 +15,9 @@ const ChatProvider = ({ children }) => {
         const userInfo = localStorage.getItem("userInfo")
           if (userInfo) {
             try {
-                console.log(userInfo);
+              
                 const  data = JSON.parse(userInfo);
-                console.log("data==", data);
+               
                 setUser(data);
             } catch (error) {
                 console.error("Error parsing JSON:", error);

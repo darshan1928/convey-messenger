@@ -22,7 +22,7 @@ import { Text } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { ImSearch } from "react-icons/Im";
 import { useState } from "react";
-import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { BellIcon } from "@chakra-ui/icons";
 import { ChatState } from "../../context/ChatProvider";
 import { Avatar } from "@chakra-ui/avatar";
 import ProfileModel from "./ProfileModel";
@@ -142,7 +142,7 @@ export default function SideDrawer() {
                 {/* <Text fontSize="2xl" fontFamily="work sans">
                     CONVEY
                 </Text> */}
-                <Image objectFit="cover" boxSize="50px" width="120px" src="../../../public/convey-logo.png" alt="logo" />
+                <Image objectFit="cover" boxSize="50px" width="120px" src="/convey-logo.png" alt="logo" />
                 <div>
                     <Menu>
                         <MenuButton p={1}>

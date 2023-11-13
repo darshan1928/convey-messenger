@@ -1,4 +1,4 @@
-const asyncHandler = require("express-async-handler");
+
 const User = require("../models/userModels");
 const { generateToken } = require("../config/generateToken");
 const { hashPassword, comparePassword } = require("../config/hashPAssword");
@@ -28,11 +28,7 @@ const registerUser = async (req, res) => {
      
       const token =  generateToken(user._id);
      
-     console.log( {_id: user.id,
-          name: user.name,
-          email: user.email,
-          pic: user.pic,
-          token})
+    
       res.status(201).json({
           _id: user.id,
           name: user.name,
@@ -68,7 +64,7 @@ const authUser = async (req, res) => {
         const userWithoutPassword = { ...user._doc };
         delete userWithoutPassword.password;
          const token = generateToken(user._id);
-         console.log("token==",token);
+       
         res.status(200).json({...userWithoutPassword,token});
     } catch (error) {
         console.log("error=", error.message);
