@@ -3,6 +3,7 @@ import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, V
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ChatState } from "../../context/ChatProvider";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 export default function Login() {
     const toast = useToast();
@@ -71,7 +72,7 @@ export default function Login() {
                         />
                         <InputRightElement width="4.rem">
                             <Button h="1.75rem" size="sm" onClick={() => setShow(!show)}>
-                                {show ? "Hide" : "Show"}
+                            {show ? <AiFillEyeInvisible style={{fontSize:'20px'}}/> : <AiFillEye style={{fontSize:'20px'}}/>}
                             </Button>
                         </InputRightElement>
                     </InputGroup>

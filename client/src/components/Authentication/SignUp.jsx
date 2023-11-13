@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai"
 export default function SignUp() {
     const [show, setShow] = useState(false);
     const [hide, setHide] = useState(false);
@@ -140,7 +141,7 @@ export default function SignUp() {
                     />
                     <InputRightElement width="4.rem">
                         <Button h="1.75rem" size="sm" onClick={() => setShow(!show)}>
-                            {show ? "Hide" : "Show"}
+                            {show ? <AiFillEyeInvisible style={{fontSize:'20px'}}/> : <AiFillEye style={{fontSize:'20px'}}/>}
                         </Button>
                     </InputRightElement>
                 </InputGroup>
@@ -156,7 +157,7 @@ export default function SignUp() {
                     />
                     <InputRightElement width="4.rem">
                         <Button h="1.75rem" size="sm" onClick={() => setHide(!hide)}>
-                            {hide ? "Hide" : "Show"}
+                            {hide ? <AiFillEyeInvisible style={{fontSize:'20px'}}/> : <AiFillEye style={{fontSize:'20px'}}/>}
                         </Button>
                     </InputRightElement>
                 </InputGroup>
