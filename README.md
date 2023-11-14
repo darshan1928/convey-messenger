@@ -9,7 +9,12 @@ Uses Socket.io for real time communication and stores user details in encrypted 
 **Server:** Node JS, Express JS
 
 **Database:** Mongo DB
-  
+## Screenshots
+<img src="https://github.com/darshan1928/convey-messenger/client/src/screenshots/md-1.png" />
+<img src="https://github.com/darshan1928/convey-messenger/client/src/screenshots/md-2.png" />
+<img src="https://github.com/darshan1928/convey-messenger/client/src/screenshots/sm-3.png" />
+<img src="https://github.com/darshan1928/convey-messenger/client/src/screenshots/sm-4.png" />
+
 ## Run Locally
 
 Clone the project
