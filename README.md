@@ -1,12 +1,19 @@
 # convey-messenger
-Convey is a Full Stack Chatting App.
-Uses Socket.io for real time communication and stores user details in encrypted format in Mongo DB Database.
+Convey represents a single-page, full-stack real-time chat application. The frontend is meticulously crafted with React JS, employing the Chakra UI framework for an aesthetically pleasing and responsive design.
+
+Real-time communication is facilitated through Socket.io, enhancing the app's interactive capabilities. The backend, powered by Express JS, functions as the API server, orchestrating seamless communication with a MongoDB database where user data is stored in an encrypted format.
+
+Efficient state management is achieved using the useContext feature, contributing to a well-structured application architecture. Form validation on the sign-in and sign-up pages is facilitated through the useForm hook, optimizing user input and minimizing errors.
+
+Convey places a strong emphasis on security through the implementation of JWT for authentication and authorization, safeguarding user access. Icons, sourced from the React Icons library, enhance the visual appeal of the application.
+
+In essence, Convey emerges as a technologically sophisticated chat application, boasting real-time communication, an elegant user interface.
 
 ## Tech Stack
 
-**Client:** React JS
+**Client:** React JS ,Chakra Ui , socket io 
 
-**Server:** Node JS, Express JS
+**Server:** Node JS, Express JS , socket io
 
 **Database:** Mongo DB
 ## Screenshots
