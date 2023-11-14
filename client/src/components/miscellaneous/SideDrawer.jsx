@@ -19,7 +19,8 @@ import {
 } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
-import { ImSearch } from "react-icons/Im";
+import { ImSearch } from "react-icons/im";
+
 import { useState } from "react";
 import { BellIcon } from "@chakra-ui/icons";
 import { ChatState } from "../../context/ChatProvider";
