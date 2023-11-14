@@ -138,7 +138,7 @@ export default function GroupChatModal({ children }) {
                 }}
                 rightIcon={<MdGroupAdd size={"1.5em"} />}
                 display="flex"
-                fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+                fontSize={{ base: "17px", md: "17px", lg: "17px" }}
             >
                 New Group
             </Button>
